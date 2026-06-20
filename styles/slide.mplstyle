@@ -1,0 +1,7 @@
+figure.figsize: 7.874016, 4.724409
+figure.dpi: 120
+savefig.dpi: 200
+font.family: sans-serif
+font.size: 24
+lines.linewidth: 2.4
+image.cmap: magma

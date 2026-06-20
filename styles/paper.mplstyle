@@ -1,0 +1,7 @@
+figure.figsize: 3.149606, 1.968504
+figure.dpi: 120
+savefig.dpi: 300
+font.family: serif
+font.size: 10
+lines.linewidth: 1.0
+image.cmap: viridis

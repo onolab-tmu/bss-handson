@@ -1,0 +1,24 @@
+[project]
+name = "bss-handson"
+version = "0.1.0"
+description = "Hands-on project for acoustic blind source separation."
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "fast-bss-eval>=0.1.4",
+    "matplotlib>=3.8",
+    "numpy>=1.26",
+    "omegaconf>=2.3.1",
+    "pandas>=3.0.3",
+    "pyroomacoustics>=0.8",
+    "scipy>=1.11",
+    "seaborn>=0.13.2",
+    "soundfile>=0.12",
+]
+
+[project.scripts]
+bss-handson = "bss_handson.cli:main"
+
+[build-system]
+requires = ["uv_build>=0.11.20,<0.12.0"]
+build-backend = "uv_build"

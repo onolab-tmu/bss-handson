@@ -1,0 +1,8 @@
+axes.grid: True
+grid.linestyle: --
+grid.linewidth: 0.6
+grid.alpha: 0.4
+xtick.direction: in
+ytick.direction: in
+pdf.fonttype: 42
+ps.fonttype: 42

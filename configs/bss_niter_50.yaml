@@ -1,0 +1,42 @@
+output_dir: results/bss_niter_50
+seed: 0
+dataset:
+  basedir: data/cmu_arctic
+  speakers:
+  - bdl
+  - slt
+  utterance_indices:
+  - 0
+  - 1
+stft:
+  window: hann
+  win_length: 1024
+  hop: 256
+room:
+  fs: 16000
+  size:
+  - 6.0
+  - 4.0
+  rt60: 0.3
+  source_positions:
+  - - 1.5
+    - 1.0
+  - - 4.5
+    - 3.0
+  mic_positions:
+  - - 3.0
+    - 1.975
+  - - 3.0
+    - 2.025
+auxiva:
+  n_iter: 50
+  model: laplace
+  update_method: ip
+  eps: 1.0e-10
+  reference_mic: 0
+plot:
+  style:
+  - styles/common.mplstyle
+  - styles/paper.mplstyle
+  vmin_db: -80
+  vmax_db: 0
