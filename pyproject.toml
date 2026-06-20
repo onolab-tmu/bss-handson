@@ -3,6 +3,7 @@ name = "bss-handson"
 version = "0.1.0"
 description = "Hands-on project for acoustic blind source separation."
 readme = "README.md"
+license = "CC-BY-NC-4.0"
 requires-python = ">=3.11"
 dependencies = [
     "fast-bss-eval>=0.1.4",
