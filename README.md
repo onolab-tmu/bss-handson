@@ -175,7 +175,8 @@ results/bss_example/
 
 `config.yaml` は command line override を反映した最終設定である．
 `metrics.json` は最終反復後の SDR, SIR, SAR, permutation を保存する．
-`iteration_metrics.json` は 0, 10, 20, 30, 40, 50 回目の分離性能を保存する．
+`iteration_metrics.json` は，0 から `auxiva.n_iter` まで 10 回ごとの分離性能を保存する．
+標準設定の `auxiva.n_iter=50` では，0, 10, 20, 30, 40, 50 回目の 6 点を含む．
 
 ## パラメータ変更
 
@@ -253,7 +254,8 @@ uv run python scripts/plot_bss_metrics.py \
 ```
 
 反復回数に対する分離性能を見る場合は，`iteration_metrics.json` を使う．
-このファイルは 1 回の AuxIVA 実行中に callback で途中の分離結果を評価した結果であり，0, 10, 20, 30, 40, 50 回目の 6 点を含む．
+このファイルは 1 回の AuxIVA 実行中に callback で途中の分離結果を評価した結果である．
+標準設定の `auxiva.n_iter=50` では，0, 10, 20, 30, 40, 50 回目の 6 点を含む．
 各点では，その時点の分離行列を使って分離信号を作り，波形へ戻してから SDR/SIR/SAR を計算する．
 
 ```bash
@@ -361,13 +363,9 @@ pyroomacoustics の `pyroomacoustics.bss.auxiva` は呼び出していない．
 
 ```bash
 uv run python -m py_compile \
-  src/bss_handson/auxiva.py \
-  src/bss_handson/cli.py \
-  scripts/run_bss.py \
-  scripts/evaluate_random_bss.py \
-  scripts/show_bss_metrics.py \
-  scripts/plot_bss_metrics.py \
-  scripts/plot_bss_niter_metrics.py
+  src/bss_handson/*.py \
+  scripts/*.py \
+  scripts/steps/*.py
 ```
 
 最小限の smoke run は，反復回数を小さくして別の出力先に保存する．
