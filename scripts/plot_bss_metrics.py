@@ -64,7 +64,9 @@ def main() -> None:
     for ax in grid.axes.flat:
         ax.tick_params(axis="x", rotation=30)
         apply_axis_style(ax)
-    grid.figure.subplots_adjust(left=0.12, right=0.98, bottom=0.25, top=0.86, wspace=0.45)
+    grid.figure.subplots_adjust(
+        left=0.12, right=0.98, bottom=0.25, top=0.86, wspace=0.45
+    )
     grid.figure.savefig(output_path)
     plt.close(grid.figure)
 

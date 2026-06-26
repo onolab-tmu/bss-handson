@@ -6,8 +6,8 @@ import json
 import numpy as np
 from omegaconf import OmegaConf
 
-from bss_handson.config import get_dataset_config, get_room_config
-from run_bss import run_separation_pipeline, save_json
+from bss_handson.io import save_json
+from bss_handson.pipeline import run_separation_pipeline
 
 
 def sample_source_positions(
@@ -26,14 +26,17 @@ def sample_source_positions(
                 rng.uniform(margin, room_depth - margin),
             ]
         )
-        if all(np.linalg.norm(candidate - np.array(position)) >= min_distance for position in positions):
+        if all(
+            np.linalg.norm(candidate - np.array(position)) >= min_distance
+            for position in positions
+        ):
             positions.append(candidate.tolist())
     return positions
 
 
 def run_trial(config: dict, rng: np.random.Generator, max_utterance_index: int) -> dict:
-    dataset_config = get_dataset_config(config)
-    room_config = get_room_config(config)
+    dataset_config = config["dataset"]
+    room_config = config["room"]
     n_sources = len(dataset_config["speakers"])
     utterance_indices = rng.integers(
         0,
@@ -64,7 +67,9 @@ def run_trial(config: dict, rng: np.random.Generator, max_utterance_index: int) 
 def summarize_trials(trials: list[dict]) -> dict:
     summary = {}
     for metric_name in ["sdr", "sir", "sar"]:
-        values = np.asarray([trial["metrics"][metric_name] for trial in trials], dtype=np.float64)
+        values = np.asarray(
+            [trial["metrics"][metric_name] for trial in trials], dtype=np.float64
+        )
         summary[metric_name] = {
             "mean_per_source": values.mean(axis=0).tolist(),
             "std_per_source": values.std(axis=0).tolist(),
@@ -98,7 +103,9 @@ def save_trial_csv(trials: list[dict], path: Path) -> None:
                         "trial": trial_index,
                         "source": source_index,
                         "utterance_index": utterance_index,
-                        "source_position": json.dumps(trial["source_positions"][source_index]),
+                        "source_position": json.dumps(
+                            trial["source_positions"][source_index]
+                        ),
                         "sdr": metrics["sdr"][source_index],
                         "sir": metrics["sir"][source_index],
                         "sar": metrics["sar"][source_index],

@@ -9,7 +9,9 @@ import seaborn as sns
 from bss_handson.plot_style import apply_axis_style
 
 
-def load_iteration_metrics(metrics_path: str | Path = "results/bss_example/iteration_metrics.json") -> pd.DataFrame:
+def load_iteration_metrics(
+    metrics_path: str | Path = "results/bss_example/iteration_metrics.json",
+) -> pd.DataFrame:
     rows = []
     records = json.loads(Path(metrics_path).read_text())
     for record in records:
@@ -28,7 +30,9 @@ def load_iteration_metrics(metrics_path: str | Path = "results/bss_example/itera
 
 def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--metrics-path", default="results/bss_example/iteration_metrics.json")
+    parser.add_argument(
+        "--metrics-path", default="results/bss_example/iteration_metrics.json"
+    )
     parser.add_argument("--output", default="results/metrics_by_niter.png")
     parser.add_argument(
         "--style",
@@ -63,7 +67,9 @@ def main() -> None:
         ax.set_xlim(0, 50)
         ax.set_xticks(range(0, 51, 10))
         apply_axis_style(ax)
-    grid.figure.subplots_adjust(left=0.12, right=0.98, bottom=0.22, top=0.86, wspace=0.45)
+    grid.figure.subplots_adjust(
+        left=0.12, right=0.98, bottom=0.22, top=0.86, wspace=0.45
+    )
     grid.figure.savefig(output_path)
     plt.close(grid.figure)
 
